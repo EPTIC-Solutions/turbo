@@ -1,9 +1,9 @@
 # Helpers for making Hotwired Turbo work with Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/EPTIC-Solutions/turbo.svg?style=flat-square)](https://packagist.org/packages/EPTIC-Solutions/turbo)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/eptic/turbo.svg?style=flat-square)](https://packagist.org/packages/eptic/turbo)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/EPTIC-Solutions/turbo/run-tests?label=tests)](https://github.com/EPTIC-Solutions/turbo/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/EPTIC-Solutions/turbo/Check%20&%20fix%20styling?label=code%20style)](https://github.com/EPTIC-Solutions/turbo/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/EPTIC-Solutions/turbo.svg?style=flat-square)](https://packagist.org/packages/EPTIC-Solutions/turbo)
+[![Total Downloads](https://img.shields.io/packagist/dt/eptic/turbo.svg?style=flat-square)](https://packagist.org/packages/eptic/turbo)
 
 ---
 This repo can be used to scaffold a Laravel package. Follow these steps to get started:

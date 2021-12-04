@@ -59,7 +59,7 @@ class TurboFrameResponse implements Responsable
         if (! $this->partialView) {
             throw TurboStreamResponseFailedException::missingPartial();
         }
-        
+
         return response(
             $this->render()
         );

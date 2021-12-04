@@ -143,7 +143,7 @@ class TurboStreamResponse implements Responsable
 
     private function render(): string
     {
-        return view('turbo-stream', [
+        return view('turbo::turbo-stream', [
             'target' => $this->useTarget,
             'action' => $this->useAction,
             'partial' => $this->partialView,

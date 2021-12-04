@@ -18,7 +18,7 @@ class TurboFrameResponse implements Responsable
     private array $partialData = [];
     private string $template = '';
     public const TEMPLATES = [
-        'generic' => 'turbo-frame'
+        'generic' => 'turbo::turbo-frame'
     ];
 
     private function inserted(string $template, string $id, View $partial, string $target = null): self

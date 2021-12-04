@@ -2,9 +2,9 @@
 
 namespace Eptic\Turbo\Tests;
 
+use Eptic\Turbo\TurboServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Eptic\Turbo\TurboServiceProvider;
 
 class TestCase extends Orchestra
 {

@@ -5,11 +5,11 @@ namespace Eptic\Turbo;
 use Eptic\Turbo\Responses\TurboFrameResponse;
 use Eptic\Turbo\Responses\TurboStreamResponse;
 use Illuminate\Contracts\View\View;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\ResponseFactory;
-use Illuminate\Http\Request;
+use Spatie\LaravelPackageTools\Package;
+use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class TurboServiceProvider extends PackageServiceProvider
 {
@@ -45,14 +45,16 @@ class TurboServiceProvider extends PackageServiceProvider
             return TurboStreamResponse::create($target, $action, $partial);
         });
 
-        ResponseFactory::macro('turboStream',
+        ResponseFactory::macro(
+            'turboStream',
             function (string $target = null, string $action = null, View $partial = null) {
                 if ($target === null) {
                     return new TurboStreamResponse();
                 }
 
                 return TurboStreamResponse::create($target, $action, $partial);
-            });
+            }
+        );
 
         Response::macro('turboFrame', function () {
             return new TurboFrameResponse();

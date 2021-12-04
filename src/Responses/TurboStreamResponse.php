@@ -147,7 +147,7 @@ class TurboStreamResponse implements Responsable
             'target' => $this->useTarget,
             'action' => $this->useAction,
             'partial' => $this->partialView,
-            'partialData' => $this->partialData
+            'partialData' => $this->partialData,
         ])->render();
     }
 }

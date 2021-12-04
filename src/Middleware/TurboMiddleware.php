@@ -2,9 +2,9 @@
 
 namespace Eptic\Turbo\Middleware;
 
+use Closure;
 use Eptic\Turbo\Helpers\RouteRedirectGuesser;
 use Eptic\Turbo\Turbo;
-use Closure;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

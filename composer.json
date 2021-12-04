@@ -1,5 +1,5 @@
 {
-    "name": "eptic/turbo",
+    "name": "eptic-solutions/turbo",
     "description": "Helpers for making Hotwired Turbo work with Laravel",
     "keywords": [
         "eptic",
@@ -34,8 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Eptic\\Turbo\\": "src",
-            "Eptic\\Turbo\\Database\\Factories\\": "database/factories"
+            "Eptic\\Turbo\\": "src"
         }
     },
     "autoload-dev": {
@@ -55,10 +54,7 @@
         "laravel": {
             "providers": [
                 "Eptic\\Turbo\\TurboServiceProvider"
-            ],
-            "aliases": {
-                "Turbo": "Eptic\\Turbo\\Facades\\Turbo"
-            }
+            ]
         }
     },
     "minimum-stability": "dev",

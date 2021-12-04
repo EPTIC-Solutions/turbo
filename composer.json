@@ -1,5 +1,5 @@
 {
-    "name": "eptic-solutions/turbo",
+    "name": "eptic/turbo",
     "description": "Helpers for making Hotwired Turbo work with Laravel",
     "keywords": [
         "eptic",

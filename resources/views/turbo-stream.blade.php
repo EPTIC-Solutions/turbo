@@ -1,8 +1,8 @@
 {{-- This file should not be formatted! --}}
 <turbo-stream target="{{ $target }}" action="{{ $action }}">
-    @if ($partial ?? false)
+    @if (isset($partial))
         <template>
-            @include($partial, $partialData)
+            @include($partial, $partialData ?? [])
         </template>
     @endif
 </turbo-stream>

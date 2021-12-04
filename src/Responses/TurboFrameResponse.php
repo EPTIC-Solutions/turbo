@@ -33,12 +33,14 @@ class TurboFrameResponse implements Responsable
     }
 
     /**
-     * Return a generic turbo frame response already wrapped with <turbo-frame> that contains the HTML that is present in the given view
-     * with the specific target mentioned
+     * Return a generic turbo frame response containing the rendered view partial provided wrapped with <<turbo-frame>>
+     * tags appended with the provided target and id.
+     *
+     * Read the original Hotwired/Turbo documentation <a href="https://turbo.hotwired.dev/handbook/frames">here</a> for more information about the $id and $target.
      *
      * @param  string  $id  The target id where the content must be added
      * @param  View  $partial  The view that will be rendered inside the turbo-frame component
-     * @param  string|null  $target
+     * @param  string|null  $target The target of the frame, either '_top' or null
      * @return self
      */
     public function generic(string $id, View $partial, string $target = null): self
@@ -57,8 +59,8 @@ class TurboFrameResponse implements Responsable
         if (! $this->partialView) {
             throw TurboStreamResponseFailedException::missingPartial();
         }
-
-        return Turbo::makeFrame(
+        
+        return response(
             $this->render()
         );
     }

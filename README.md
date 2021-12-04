@@ -5,66 +5,92 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/EPTIC-Solutions/turbo/Check%20&%20fix%20styling?label=code%20style)](https://github.com/EPTIC-Solutions/turbo/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/eptic/turbo.svg?style=flat-square)](https://packagist.org/packages/eptic/turbo)
 
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
-
-1. Press the "Use template" button at the top of this repo to create a new repo with the contents of this turbo
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files
-3. Remove this block of text.
-4. Have fun creating your package.
-5. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/turbo.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/turbo)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require eptic-solutions/turbo
+composer require eptic/turbo
 ```
 
-You can publish and run the migrations with:
+As per the official @Hotwired/Turbo documentation, you will need to add the TurboMiddleware provided in this package to the `web` group inside `Kernel.php` to handle the redirects as Turbo expects them.  
+You can read more information about this in the official documentation:  
+[Redirecting After a Form Submission](https://turbo.hotwired.dev/handbook/drive#redirecting-after-a-form-submission)
 
-```bash
-php artisan vendor:publish --tag="turbo_without_prefix-migrations"
-php artisan migrate
+Example:
+```php
+'web' => [
+    \App\Http\Middleware\EncryptCookies::class,
+    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    \Illuminate\Session\Middleware\StartSession::class,
+    // \Illuminate\Session\Middleware\AuthenticateSession::class,
+    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \App\Http\Middleware\VerifyCsrfToken::class,
+    \Illuminate\Routing\Middleware\SubstituteBindings::class,
+    -> \Eptic\Turbo\Middleware\TurboMiddleware::class,
+],
 ```
 
 You can publish the config file with:
 ```bash
-php artisan vendor:publish --tag="turbo_without_prefix-config"
+php artisan vendor:publish --tag="turbo-config"
 ```
 
-Optionally, you can publish the views using
+Optionally, you can publish the views used as templates using
 
 ```bash
-php artisan vendor:publish --tag="example-views"
+php artisan vendor:publish --tag="turbo-views"
 ```
 
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
+You can see the content of the config file in the configs folder.
 
 ## Usage
 
+### Turbo Frames
+To generate a turbo frame response
 ```php
-$turbo = new Eptic\Turbo();
-echo $turbo->echoPhrase('Hello, Eptic!');
+return response()->turboFrame()->generic(id: 'gallery', partial: view('pages.galleries._partials.create'), target: '#gallery-create');
 ```
 
+### Turbo Streams
+
+To generate a turbo stream, you can use the `turboStream` method on the response object.  
+It has all the signatures present in the original documentation from Hotwired:
+- Append:
+    ```php
+    return response()->turboStream()->append(target: '#gallery-create', partial: view('pages.galleries._partials.create'));
+    ````
+- Prepend:
+    ```php
+    return response()->turboStream()->prepend(target: '#gallery-create', partial: view('pages.galleries._partials.create'));
+    ````
+- Replace:
+    ```php
+    return response()->turboStream()->replace(target: '#gallery-create', partial: view('pages.galleries._partials.create'));
+    ````
+- Update:
+    ```php
+    return response()->turboStream()->update(target: '#gallery-create', partial: view('pages.galleries._partials.create'));
+    ````
+- Remove:
+    ```php
+    return response()->turboStream()->remove(target: '#gallery-create');
+    ````
+- Before:
+    ```php
+    return response()->turboStream()->before(target: '#gallery-create', partial: view('pages.galleries._partials.gallery'));
+    ````
+- After:
+    ```php
+    return response()->turboStream()->after(target: '#gallery-create', partial: view('pages.galleries._partials.gallery'));
+    ````
+
+If you already have a view that contains the entire template and only want to set the correct content-type so it is recognised as a turbo stream, you can use:
+```php
+return response()->turboStream()->view(view: 'pages.galleries.create', data: $data);
+// Or you can pass in a view directly
+return response()->turboStream()->view(view: view('pages.galleries.create', $data));
+```
 ## Testing
 
 ```bash

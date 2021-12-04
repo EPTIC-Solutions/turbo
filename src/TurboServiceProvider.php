@@ -63,21 +63,5 @@ class TurboServiceProvider extends PackageServiceProvider
         ResponseFactory::macro('turboFrame', function () {
             return new TurboFrameResponse();
         });
-
-        Response::macro('turboStreamView', function ($view, $data = []) {
-            if (! $view instanceof View) {
-                $view = view($view, $data);
-            }
-
-            return Turbo::makeStream($view->render());
-        });
-
-        ResponseFactory::macro('turboStreamView', function ($view, $data = []) {
-            if (! $view instanceof View) {
-                $view = view($view, $data);
-            }
-
-            return Turbo::makeStream($view->render());
-        });
     }
 }

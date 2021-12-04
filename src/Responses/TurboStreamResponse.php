@@ -27,20 +27,6 @@ class TurboStreamResponse implements Responsable
         return $builder->inserted($target, $action ?: 'replace', $view);
     }
 
-    /**
-     * Remove the DOM element with the provided ID from the DOM.
-     *
-     * @param  string  $target Target DOM ID that needs to be removed.
-     * @return self
-     */
-    public function remove(string $target): self
-    {
-        $this->useAction = 'remove';
-        $this->useTarget = $target;
-
-        return $this;
-    }
-
     private function inserted(string $target, string $action, View $partial): self
     {
         $this->useTarget = $target;
@@ -52,76 +38,107 @@ class TurboStreamResponse implements Responsable
     }
 
     /**
-     * Append the DOM element present in the provided partial inside the DOM element with the provided DOM ID.
+     * Append the DOM element present in the provided partial inside the DOM element with the provided QuerySelector.
      *
-     * @param  string  $target  Target DOM ID in which we will append data.
-     * @param  View  $view  The view that needs to be rendered
+     * @param  string  $target  Target QuerySelector in which we will append data.
+     * @param  View  $partial  The view partial that will be rendered inside the <template> tag.
      * @return self
      */
-    public function append(string $target, View $view): self
+    public function append(string $target, View $partial): self
     {
-        return $this->inserted($target, 'append', $view);
+        return $this->inserted($target, 'append', $partial);
     }
 
     /**
-     * Prepend the DOM element present in the provided partial inside the DOM element with the provided DOM ID.
+     * Prepend the DOM element present in the provided partial inside the DOM element with the provided QuerySelector.
      *
-     * @param  string  $target  Target DOM ID in which we will prepend data.
-     * @param  View  $view  The view that needs to be rendered
+     * @param  string  $target  Target QuerySelector in which we will prepend data.
+     * @param  View  $partial  The view partial that will be rendered inside the <template> tag.
      * @return self
      */
-    public function prepend(string $target, View $view): self
+    public function prepend(string $target, View $partial): self
     {
-        return $this->inserted($target, 'prepend', $view);
+        return $this->inserted($target, 'prepend', $partial);
     }
 
     /**
-     * Add the DOM element(s) present in the provided partial before the DOM element with the provided DOM ID.
+     * Add the DOM element(s) present in the provided partial before the DOM element with the provided QuerySelector.
      *
-     * @param  string  $target  Target DOM ID before which we will add data.
-     * @param  View  $view  The view that needs to be rendered
+     * @param  string  $target  Target QuerySelector before which we will add data.
+     * @param  View  $partial  The view partial that will be rendered inside the <template> tag.
      * @return self
      */
-    public function before(string $target, View $view): self
+    public function before(string $target, View $partial): self
     {
-        return $this->inserted($target, 'before', $view);
+        return $this->inserted($target, 'before', $partial);
     }
 
     /**
-     * Add the DOM element(s) present in the provided partial after the DOM element with the provided DOM ID.
+     * Add the DOM element(s) present in the provided partial after the DOM element with the provided QuerySelector.
      *
-     * @param  string  $target  Target DOM ID after which we will add data.
-     * @param  View  $view  The view that needs to be rendered
+     * @param  string  $target  Target QuerySelector after which we will add data.
+     * @param  View  $partial  The view partial that will be rendered inside the <template> tag.
      * @return self
      */
-    public function after(string $target, View $view): self
+    public function after(string $target, View $partial): self
     {
-        return $this->inserted($target, 'after', $view);
+        return $this->inserted($target, 'after', $partial);
     }
 
     /**
-     * Update the target with the provided DOM ID with the data present in the provided partial.
+     * Update the target with the provided QuerySelector with the data present in the provided partial.
      * Any handlers bound to the element *$target* would be retained.
      *
-     * @param  string  $target  Target DOM ID which will be updated
-     * @param  View  $view  The view that needs to be rendered
+     * @param  string  $target  Target QuerySelector which will be updated
+     * @param  View  $partial  The view partial that will be rendered inside the <template> tag.
      * @return self
      */
-    public function update(string $target, View $view): self
+    public function update(string $target, View $partial): self
     {
-        return $this->inserted($target, 'update', $view);
+        return $this->inserted($target, 'update', $partial);
     }
 
     /**
-     * Replace the target with the provided DOM ID with the data present in the provided partial.
+     * Replace the target with the provided QuerySelector with the HTML present in the provided partial.
      *
-     * @param  string  $target  Target DOM ID which will be replaced
-     * @param  View  $view  The view that needs to be rendered
+     * @param  string  $target  Target QuerySelector which will be replaced
+     * @param  View  $partial  The view partial that will be rendered inside the <template> tag.
      * @return self
      */
-    public function replace(string $target, View $view): self
+    public function replace(string $target, View $partial): self
     {
-        return $this->inserted($target, 'replace', $view);
+        return $this->inserted($target, 'replace', $partial);
+    }
+
+    /**
+     * Remove the DOM element with the provided QuerySelector from the DOM.
+     *
+     * @param  string  $target Target QuerySelector that needs to be removed.
+     * @return self
+     */
+    public function remove(string $target): self
+    {
+        $this->useAction = 'remove';
+        $this->useTarget = $target;
+
+        return $this;
+    }
+
+    /**
+     * Create a turbo stream response from a view.
+     * This will make sure the rendered response contains the correct headers.
+     *
+     * @param  View|string  $view A view instance or the view name
+     * @param  array|null  $data The data to pass to the view, only needed if you don't provide a view instance
+     * @return Response
+     */
+    public function view(View|string $view, ?array $data = []): Response
+    {
+        if (! $view instanceof View) {
+            $view = view($view, $data);
+        }
+
+        return Turbo::makeStream($view->render());
     }
 
     /**

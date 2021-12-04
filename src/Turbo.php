@@ -19,13 +19,15 @@ class Turbo
         return Str::contains($request->header('Accept', ''), static::TURBO_STREAM_FORMAT);
     }
 
-    public static function makeStream(string $content, $status = 200): Response
+    /**
+     * Create a new response instance for the given content with the correct Turbo Stream content type.
+     *
+     * @param  string  $content
+     * @param  int  $status
+     * @return Response
+     */
+    public static function makeStream(string $content, int $status = 200): Response
     {
         return response($content, $status, ['Content-Type' => static::TURBO_STREAM_FORMAT]);
-    }
-
-    public static function makeFrame(string $content, $status = 200): Response
-    {
-        return response($content, $status);
     }
 }

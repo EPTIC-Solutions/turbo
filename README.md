@@ -58,31 +58,31 @@ To generate a turbo stream, you can use the `turboStream` method on the response
 It has all the signatures present in the original documentation from Hotwired:
 - Append:
     ```php
-    return response()->turboStream()->append(target: '#gallery-create', partial: view('pages.galleries._partials.create'));
+    return response()->turboStream()->append(target: 'gallery-create', partial: view('pages.galleries._partials.create'));
     ````
 - Prepend:
     ```php
-    return response()->turboStream()->prepend(target: '#gallery-create', partial: view('pages.galleries._partials.create'));
+    return response()->turboStream()->prepend(target: 'gallery-create', partial: view('pages.galleries._partials.create'));
     ````
 - Replace:
     ```php
-    return response()->turboStream()->replace(target: '#gallery-create', partial: view('pages.galleries._partials.create'));
+    return response()->turboStream()->replace(target: 'gallery-create', partial: view('pages.galleries._partials.create'));
     ````
 - Update:
     ```php
-    return response()->turboStream()->update(target: '#gallery-create', partial: view('pages.galleries._partials.create'));
+    return response()->turboStream()->update(target: 'gallery-create', partial: view('pages.galleries._partials.create'));
     ````
 - Remove:
     ```php
-    return response()->turboStream()->remove(target: '#gallery-create');
+    return response()->turboStream()->remove(target: 'gallery-create');
     ````
 - Before:
     ```php
-    return response()->turboStream()->before(target: '#gallery-create', partial: view('pages.galleries._partials.gallery'));
+    return response()->turboStream()->before(target: 'gallery-create', partial: view('pages.galleries._partials.gallery'));
     ````
 - After:
     ```php
-    return response()->turboStream()->after(target: '#gallery-create', partial: view('pages.galleries._partials.gallery'));
+    return response()->turboStream()->after(target: 'gallery-create', partial: view('pages.galleries._partials.gallery'));
     ````
 
 If you already have a view that contains the entire template and only want to set the correct content-type so it is recognised as a turbo stream, you can use:

@@ -1,9 +1,20 @@
 # Helpers for making Hotwired Turbo work with Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/eptic/turbo.svg?style=flat-square)](https://packagist.org/packages/eptic/turbo)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/EPTIC-Solutions/turbo/run-tests?label=tests)](https://github.com/EPTIC-Solutions/turbo/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/workflow/status/EPTIC-Solutions/turbo/Check%20&%20fix%20styling?label=code%20style)](https://github.com/EPTIC-Solutions/turbo/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/eptic/turbo.svg?style=flat-square)](https://packagist.org/packages/eptic/turbo)
+<p align="center"><a href="https://solutions.eptic.ro" target="_blank"><img src="https://raw.githubusercontent.com/eptic-solutions/art/master/cover.png" width="400px"/></a></p>
+<p align="center">
+    <a href="https://packagist.org/packages/eptic/turbo">
+        <img src="https://img.shields.io/packagist/v/eptic/turbo.svg?style=flat-square" alt="Latest Version on Packagist" />
+    </a>
+    <a href="https://github.com/EPTIC-Solutions/turbo/actions?query=workflow%3Arun-tests+branch%3Amaster">
+        <img src="https://img.shields.io/github/workflow/status/EPTIC-Solutions/turbo/run-tests?label=tests" alt="GitHub Tests Action Status" />
+    </a>
+    <a href="https://github.com/EPTIC-Solutions/turbo/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amain">
+        <img src="https://img.shields.io/github/workflow/status/EPTIC-Solutions/turbo/Check%20&%20fix%20styling?label=code%20style" alt="GitHub Code Style Action Status" />
+    </a>
+    <a href="https://packagist.org/packages/eptic/turbo">
+        <img src="https://img.shields.io/packagist/dt/eptic/turbo.svg?style=flat-square" alt="Total Downloads" />
+    </a>
+</p>
 
 ## Installation
 

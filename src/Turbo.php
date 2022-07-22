@@ -11,6 +11,8 @@ class Turbo
     public const TURBO_STREAM_FORMAT = 'text/vnd.turbo-stream.html';
 
     /**
+     * Checks if the request is a turbo stream request.
+     *
      * @param  Request  $request
      * @return bool
      */
@@ -20,6 +22,8 @@ class Turbo
     }
 
     /**
+     * Checks if the request was made for a specific turbo frame and returns the id of the frame.
+     *
      * @param  Request  $request
      * @return string | null
      */

@@ -63,7 +63,17 @@ To generate a turbo frame response
 return response()->turboFrame()->generic(id: 'gallery', partial: view('pages.galleries._partials.create'), target: '#gallery-create');
 ```
 
+Check if the request was made inside a turbo-frame:
+```php
+request()->wantsTurboFrame()
+```
+
 ### Turbo Streams
+
+To check if a request is a turbo stream request:
+```php
+request()->expectsTurboStream()
+```
 
 To generate a turbo stream, you can use the `turboStream` method on the response object.  
 It has all the signatures present in the original documentation from Hotwired:

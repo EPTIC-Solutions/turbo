@@ -12,8 +12,8 @@ beforeEach(function () {
 it('throws missing partial exception', function () {
     $this->assertThrows(
         function () {
-        response()->turboFrame()->toResponse(request());
-    },
+            response()->turboFrame()->toResponse(request());
+        },
         TurboStreamResponseFailedException::class,
         'Missing partial: non "remove" Turbo Streams need a partial.'
     );

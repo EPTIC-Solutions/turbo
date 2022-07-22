@@ -4,7 +4,6 @@ use Eptic\Turbo\Exceptions\TurboStreamResponseFailedException;
 use Illuminate\Support\Facades\File;
 use Illuminate\View\Factory;
 
-
 beforeEach(function () {
     $viewFactory = app(Factory::class);
     $viewFactory->addLocation('tests/views');

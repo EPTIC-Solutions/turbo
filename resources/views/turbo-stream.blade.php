@@ -2,7 +2,7 @@
 <turbo-stream target="{{ $target }}" action="{{ $action }}">
     @if (isset($partial))
         <template>
-            @include($partial, $partialData ?? [])
+            {!! $partial !!}
         </template>
     @endif
 </turbo-stream>

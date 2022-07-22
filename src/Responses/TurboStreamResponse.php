@@ -12,9 +12,10 @@ use Illuminate\Http\Response;
 class TurboStreamResponse implements Responsable
 {
     private string $useTarget;
+
     private string $useAction;
-    private ?string $partialView = null;
-    private array $partialData = [];
+
+    private ?string $partial = null;
 
     public static function create(string $target, ?string $action, View $view): self
     {
@@ -31,8 +32,7 @@ class TurboStreamResponse implements Responsable
     {
         $this->useTarget = $target;
         $this->useAction = $action;
-        $this->partialView = $partial->name();
-        $this->partialData = array_merge($partial->getData(), ['isTurboStream' => true]);
+        $this->partial = $partial->render();
 
         return $this;
     }
@@ -149,7 +149,7 @@ class TurboStreamResponse implements Responsable
      */
     public function toResponse($request): Response
     {
-        if ($this->useAction !== 'remove' && ! $this->partialView) {
+        if ($this->useAction !== 'remove' && ! $this->partial) {
             throw TurboStreamResponseFailedException::missingPartial();
         }
 
@@ -163,8 +163,7 @@ class TurboStreamResponse implements Responsable
         return view('turbo::turbo-stream', [
             'target' => $this->useTarget,
             'action' => $this->useAction,
-            'partial' => $this->partialView,
-            'partialData' => $this->partialData,
+            'partial' => $this->partial,
         ])->render();
     }
 }

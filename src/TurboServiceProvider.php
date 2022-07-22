@@ -37,6 +37,10 @@ class TurboServiceProvider extends PackageServiceProvider
             return Turbo::turboVisit($this);
         });
 
+        Request::macro('wantsTurboFrame', function () {
+            return Turbo::turboFrame($this);
+        });
+
         Response::macro('turboStream', function (string $target = null, string $action = null, View $partial = null) {
             if ($target === null) {
                 return new TurboStreamResponse();

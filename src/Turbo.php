@@ -20,6 +20,15 @@ class Turbo
     }
 
     /**
+     * @param  Request  $request
+     * @return string | null
+     */
+    public static function turboFrame(Request $request): string | null
+    {
+        return $request->header('turbo-frame', null);
+    }
+
+    /**
      * Create a new response instance for the given content with the correct Turbo Stream content type.
      *
      * @param  string  $content

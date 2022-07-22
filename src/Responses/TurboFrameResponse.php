@@ -13,10 +13,13 @@ use Illuminate\Http\Response;
 class TurboFrameResponse implements Responsable
 {
     private string $id;
+
     private ?string $useTarget = null;
-    private ?string $partialView = null;
-    private array $partialData = [];
+
+    private ?string $partial = null;
+
     private string $template = '';
+
     public const TEMPLATES = [
         'generic' => 'turbo::turbo-frame',
     ];
@@ -25,8 +28,7 @@ class TurboFrameResponse implements Responsable
     {
         $this->id = $id;
         $this->useTarget = $target;
-        $this->partialView = $partial->name();
-        $this->partialData = array_merge($partial->getData(), ['isTurboStream' => true]);
+        $this->partial = $partial->render();
         $this->template = $this::TEMPLATES[$template];
 
         return $this;
@@ -56,7 +58,7 @@ class TurboFrameResponse implements Responsable
      */
     public function toResponse($request): Response
     {
-        if (! $this->partialView) {
+        if (! $this->partial) {
             throw TurboStreamResponseFailedException::missingPartial();
         }
 
@@ -79,8 +81,7 @@ class TurboFrameResponse implements Responsable
         return view($this->template, [
             'id' => $this->id,
             'target' => $this->useTarget,
-            'partial' => $this->partialView,
-            'partialData' => $this->partialData,
+            'partial' => $this->partial,
         ])->render();
     }
 }

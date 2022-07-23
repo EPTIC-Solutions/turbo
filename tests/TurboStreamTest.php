@@ -71,8 +71,8 @@ it('generates correct turbo stream - update', function () {
 
 it('checks for turbo stream header', function () {
     $request = new \Illuminate\Http\Request(server: [
-       'HTTP_ACCEPT' => \Eptic\Turbo\Turbo::TURBO_STREAM_FORMAT,
-   ]);
+        'HTTP_ACCEPT' => \Eptic\Turbo\Turbo::TURBO_STREAM_FORMAT,
+    ]);
 
     expect($request->expectsTurboStream())->toBeTrue();
 });

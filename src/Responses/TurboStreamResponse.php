@@ -13,7 +13,7 @@ class TurboStreamResponse implements Responsable
 {
     private string $useTarget;
 
-    private string $useAction;
+    private ?string $useAction = null;
 
     private ?string $partial = null;
 
@@ -35,6 +35,15 @@ class TurboStreamResponse implements Responsable
         $this->partial = $partial->render();
 
         return $this;
+    }
+
+    private function render(): string
+    {
+        return view('turbo::turbo-stream', [
+            'target' => $this->useTarget,
+            'action' => $this->useAction,
+            'partial' => $this->partial,
+        ])->render();
     }
 
     /**
@@ -113,7 +122,7 @@ class TurboStreamResponse implements Responsable
     /**
      * Remove the DOM element with the provided QuerySelector from the DOM.
      *
-     * @param  string  $target Target QuerySelector that needs to be removed.
+     * @param  string  $target  Target QuerySelector that needs to be removed.
      * @return self
      */
     public function remove(string $target): self
@@ -128,11 +137,11 @@ class TurboStreamResponse implements Responsable
      * Create a turbo stream response from a view.
      * This will make sure the rendered response contains the correct headers.
      *
-     * @param  View|string  $view A view instance or the view name
-     * @param  array|null  $data The data to pass to the view, only needed if you don't provide a view instance
+     * @param  View|string  $view  A view instance or the view name
+     * @param  array|null  $data  The data to pass to the view, only needed if you don't provide a view instance
      * @return Response
      */
-    public function view(View|string $view, ?array $data = []): Response
+    public function view(View | string $view, ?array $data = []): Response
     {
         if (! $view instanceof View) {
             $view = view($view, $data);
@@ -149,21 +158,12 @@ class TurboStreamResponse implements Responsable
      */
     public function toResponse($request): Response
     {
-        if ($this->useAction !== 'remove' && ! $this->partial) {
+        if (! $this->useAction || $this->useAction !== 'remove' && ! $this->partial) {
             throw TurboStreamResponseFailedException::missingPartial();
         }
 
         return Turbo::makeStream(
             $this->render()
         );
-    }
-
-    private function render(): string
-    {
-        return view('turbo::turbo-stream', [
-            'target' => $this->useTarget,
-            'action' => $this->useAction,
-            'partial' => $this->partial,
-        ])->render();
     }
 }

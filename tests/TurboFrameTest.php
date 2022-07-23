@@ -22,13 +22,13 @@ it('throws missing partial exception', function () {
 it('generates correct generic turbo frame', function () {
     $expectedOutput = File::get('tests/responses/turbo-frame/turbo-frame-generic.html');
 
-    expect(response()->turboFrame()->generic('test', view('turbo-frame-generic'))->toResponse(request())->getContent())
+    expect(response()->turboFrame()->generic('test', view('dummy-view'))->toResponse(request())->getContent())
         ->toBe($expectedOutput);
 });
 
 it('generates correct generic turbo frame with target', function () {
     $expectedOutput = File::get('tests/responses/turbo-frame/turbo-frame-generic-target.html');
 
-    expect(response()->turboFrame()->generic('test', view('turbo-frame-generic'), 'test2')->toResponse(request())->getContent())
+    expect(response()->turboFrame()->generic('test', view('dummy-view'), 'test2')->toResponse(request())->getContent())
         ->toBe($expectedOutput);
 });

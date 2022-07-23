@@ -10,14 +10,9 @@ beforeEach(function () {
 });
 
 it('throws missing partial exception', function () {
-    $this->assertThrows(
-        function () {
-            response()->turboStream()->toResponse(request());
-        },
-        TurboStreamResponseFailedException::class,
-        'Missing partial: non "remove" Turbo Streams need a partial.'
-    );
-});
+    response()->turboStream()->toResponse(request());
+})
+    ->throws(TurboStreamResponseFailedException::class, 'Missing partial: non "remove" Turbo Streams need a partial.');
 
 it('generates correct turbo stream - append', function () {
     $expectedOutput = File::get('tests/responses/turbo-stream/append.html');

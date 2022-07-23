@@ -10,14 +10,8 @@ beforeEach(function () {
 });
 
 it('throws missing partial exception', function () {
-    $this->assertThrows(
-        function () {
-            response()->turboFrame()->toResponse(request());
-        },
-        TurboStreamResponseFailedException::class,
-        'Missing partial: non "remove" Turbo Streams need a partial.'
-    );
-});
+    response()->turboFrame()->toResponse(request());
+})->throws(TurboStreamResponseFailedException::class, 'Missing partial: non "remove" Turbo Streams need a partial.');
 
 it('generates correct generic turbo frame', function () {
     $expectedOutput = File::get('tests/responses/turbo-frame/turbo-frame-generic.html');
